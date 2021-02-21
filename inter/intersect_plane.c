@@ -6,7 +6,7 @@
 /*   By: mchaya <mchaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:31:36 by mchaya            #+#    #+#             */
-/*   Updated: 2021/02/16 18:07:49 by mchaya           ###   ########.fr       */
+/*   Updated: 2021/02/21 16:53:01 by mchaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int		inter_plane(t_ray pack, t_rt *rt, t_plane plane)
 				rt->t = pack.t;
 				rt->color = plane.color;
 				rt->normal = plane.normal_v;
+				if (scalar_prod(rt->normal, pack.direct) > 0)
+					rt->normal = vp_mult(rt->normal, -1);
 				rt->phit = vect_sum(pack.view_p, vp_mult(pack.direct, pack.t));
 				rt->near = &plane;
 			}

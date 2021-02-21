@@ -6,7 +6,7 @@
 /*   By: mchaya <mchaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 11:41:25 by mchaya            #+#    #+#             */
-/*   Updated: 2021/02/19 15:05:53 by mchaya           ###   ########.fr       */
+/*   Updated: 2021/02/21 17:28:38 by mchaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	write_rt(t_rt *rt, t_trian *trian, t_ray pack, t_int_tr t)
 	}
 	if (trian->id == 't')
 		rt->color = trian->color[0];
-	rt->normal = normalize(cross_prod(t.a, t.b));
+	rt->normal = normalize(cross_prod(t.b, t.a));
 	if (scalar_prod(rt->normal, pack.direct) > 0)
 		rt->normal = vp_mult(rt->normal, -1);
 	pack.direct = normalize(pack.direct);

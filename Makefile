@@ -6,7 +6,7 @@
 #    By: mchaya <mchaya@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/08 16:02:05 by mchaya            #+#    #+#              #
-#    Updated: 2021/02/21 15:26:05 by mchaya           ###   ########.fr        #
+#    Updated: 2021/02/21 17:01:59 by mchaya           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,11 @@ LIBFT = libft/libft.a
 MLX_NAME = minilibx/libmlx.dylib
 $(MLX_NAME):
 	$(MAKE) -C minilibx/
+	cp $(MLX_NAME) .
 $(NAME): $(OBJ) $(MLX_NAME) $(LIBFT)
 	gcc $(CFLAGS) -o $(NAME) $(OBJ) -Lminilibx  -lmlx -Llibft -lft -Lminilibx
-#debug: $(OBJ) libmlx.a
-#	gcc -g $(OBJ) -L. -lmlx -Llibft -lft -Ilibft
+debug: $(OBJ) $(MLX_NAME) $(OBJS)
+	gcc -g $(OBJ) -L. -lmlx -Llibft -lft -Ilibft -o miniRT
 bonus: all
 clean:
 	rm -f $(OBJ)
@@ -37,6 +38,7 @@ fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C minilibx clean
 	$(MAKE) -C libft fclean
+	rm -f libmlx.dylib
 re: fclean all
 
 $(LIBFT):

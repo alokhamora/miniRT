@@ -4,3 +4,5 @@
 *.swiftdoc
 *.swiftmodule
 miniRT
+.idea
+*.bmp

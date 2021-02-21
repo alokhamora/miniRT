@@ -6,7 +6,7 @@
 /*   By: mchaya <mchaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 10:16:56 by mchaya            #+#    #+#             */
-/*   Updated: 2021/02/21 09:41:50 by mchaya           ###   ########.fr       */
+/*   Updated: 2021/02/21 16:17:56 by mchaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ int		save_to_bmp(int *arr, t_resol r)
 	size = r.height * r.width * 4 + 54;
 	write_head(fd, r, size);
 	write1(fd);
-	x = r.width - 1;
-	while (x >= 0)
+	y = r.height - 1;
+	while (y >= 0)
 	{
-		y = 0;
-		while (y < r.height)
+		x = 0;
+		while (x < r.width)
 		{
-			if ((write(fd, arr + x * r.width + y, 4)) < 0)
+			if ((write(fd, arr + y * r.width + x, 4)) < 0)
 				err_exit("Screen error");
-			y++;
+			x++;
 		}
-		x--;
+		y--;
 	}
 	return (0);
 }

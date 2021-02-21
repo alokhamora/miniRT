@@ -6,7 +6,7 @@
 #    By: mchaya <mchaya@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/08 16:02:05 by mchaya            #+#    #+#              #
-#    Updated: 2021/02/21 15:07:34 by mchaya           ###   ########.fr        #
+#    Updated: 2021/02/21 15:26:05 by mchaya           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,14 @@ OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Werror -Wextra
 CFLAGS += -Ilibft -g -I.
 all: $(NAME)
-libmlx.a:
+LIBFT = libft/libft.a
+MLX_NAME = minilibx/libmlx.dylib
+$(MLX_NAME):
 	$(MAKE) -C minilibx/
-	mv minilibx/libmlx.dylib .
-$(NAME): $(OBJ) libmlx.a
-	gcc $(CFLAGS) -o $(NAME) $(OBJ) -L. -lmlx -Llibft -lft
-debug: $(OBJ) libmlx.a
-	gcc -g $(OBJ) -L. -lmlx -Llibft -lft -Ilibft
+$(NAME): $(OBJ) $(MLX_NAME) $(LIBFT)
+	gcc $(CFLAGS) -o $(NAME) $(OBJ) -Lminilibx  -lmlx -Llibft -lft -Lminilibx
+#debug: $(OBJ) libmlx.a
+#	gcc -g $(OBJ) -L. -lmlx -Llibft -lft -Ilibft
 bonus: all
 clean:
 	rm -f $(OBJ)
@@ -37,4 +38,7 @@ fclean: clean
 	$(MAKE) -C minilibx clean
 	$(MAKE) -C libft fclean
 re: fclean all
+
+$(LIBFT):
+	make -C libft bonus
 .PHONY: all clean fclean re bonus
